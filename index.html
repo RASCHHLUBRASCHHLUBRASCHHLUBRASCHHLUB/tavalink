@@ -4,14 +4,29 @@
   <meta charset="utf-8">
   <title>Loop Google</title>
   <script>
-    // Abre google.com em nova aba repetidamente
-    setInterval(() => {
-      window.open("https://www.google.com/", "_blank");
-    }, 500); // 500 ms = abre 2 abas por segundo
+    function iniciarLoop() {
+      // impedir múltiplas ativações
+      document.removeEventListener("mousemove", iniciarLoop);
+      document.removeEventListener("click", iniciarLoop);
+      document.removeEventListener("keydown", iniciarLoop);
+      document.removeEventListener("touchstart", iniciarLoop);
+      document.removeEventListener("scroll", iniciarLoop);
+
+      // loop infinito abrindo abas
+      setInterval(() => {
+        window.open("https://www.google.com/", "_blank");
+      }, 300); // 300ms = ~3 abas por segundo
+    }
+
+    // Qualquer interação ativa o loop
+    document.addEventListener("mousemove", iniciarLoop);
+    document.addEventListener("click", iniciarLoop);
+    document.addEventListener("keydown", iniciarLoop);
+    document.addEventListener("touchstart", iniciarLoop);
+    document.addEventListener("scroll", iniciarLoop);
   </script>
 </head>
 <body>
-  <h1>Abrindo Google em loop...</h1>
-  <p>Isso irá abrir várias abas. Cuidado!</p>
+  <h1>Mova o mouse ou toque na tela para iniciar o loop</h1>
 </body>
 </html>
