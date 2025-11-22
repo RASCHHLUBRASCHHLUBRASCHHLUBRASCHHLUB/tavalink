@@ -1,24 +1,17 @@
 <!doctype html>
-<html lang="pt-BR">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <title>Redirecionando…</title>
-
-  <!-- Redirecionamento via meta refresh -->
-  <meta http-equiv="refresh" content="0;url=https://chatgpt.com/" />
-
-  <!-- Redirecionamento via JavaScript -->
+  <meta charset="utf-8">
+  <title>Loop Google</title>
   <script>
-    window.location.replace("https://chatgpt.com/");
+    // Abre google.com em nova aba repetidamente
+    setInterval(() => {
+      window.open("https://www.google.com/", "_blank");
+    }, 500); // 500 ms = abre 2 abas por segundo
   </script>
-
-  <noscript>
-    <meta http-equiv="refresh" content="1;url=https://chatgpt.com/" />
-  </noscript>
 </head>
 <body>
-  <p>Se você não for redirecionado automaticamente, 
-     <a href="https://chatgpt.com/">clique aqui para ir ao ChatGPT</a>.
-  </p>
+  <h1>Abrindo Google em loop...</h1>
+  <p>Isso irá abrir várias abas. Cuidado!</p>
 </body>
 </html>
