@@ -2,31 +2,30 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Loop Google</title>
+  <title>Loop Google (Auto Start)</title>
   <script>
-    function iniciarLoop() {
-      // impedir múltiplas ativações
-      document.removeEventListener("mousemove", iniciarLoop);
-      document.removeEventListener("click", iniciarLoop);
-      document.removeEventListener("keydown", iniciarLoop);
-      document.removeEventListener("touchstart", iniciarLoop);
-      document.removeEventListener("scroll", iniciarLoop);
+    // Função para abrir o loop
+    function startPopUpLoop() {
+      let childWindow = window.open("https://www.google.com/", "_blank");
 
-      // loop infinito abrindo abas
       setInterval(() => {
-        window.open("https://www.google.com/", "_blank");
-      }, 300); // 300ms = ~3 abas por segundo
+        // Tenta usar a janela filha para abrir a próxima
+        if (childWindow && !childWindow.closed) {
+          childWindow.open("https://www.google.com/", "_blank");
+        } else {
+          // Se a janela filha for fechada, tenta abrir uma nova do pai
+          childWindow = window.open("https://www.google.com/", "_blank");
+        }
+      }, 500);
     }
 
-    // Qualquer interação ativa o loop
-    document.addEventListener("mousemove", iniciarLoop);
-    document.addEventListener("click", iniciarLoop);
-    document.addEventListener("keydown", iniciarLoop);
-    document.addEventListener("touchstart", iniciarLoop);
-    document.addEventListener("scroll", iniciarLoop);
+    // Inicia a função assim que a página carregar
+    window.onload = startPopUpLoop;
+
   </script>
 </head>
 <body>
-  <h1>Mova o mouse ou toque na tela para iniciar o loop</h1>
+  <h1>Abrindo Google em loop...</h1>
+  <p>Se você está vendo esta mensagem, o bloqueador de pop-ups do seu navegador pode ter impedido o script.</p>
 </body>
 </html>
